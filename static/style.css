@@ -3,11 +3,12 @@ font-family: monospace;
 }
 h1 {
 background-color: yellow;
-display: inline-block;
+display: flex;
 font-size: 3em;
 margin: 0;
 padding: 14px;
 text-align: center;
+justify-content: center;
 }
 #chatbox {
 margin-left: auto;
