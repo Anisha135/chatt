@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link
+    rel="shortcut icon"
+    type="image/x-icon"
+    href="https://pngimage.net/wp-content/uploads/2018/06/woman-emoji-png-7.png"
+/>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>
+    <img
+            src="https://pngimage.net/wp-content/uploads/2018/06/woman-emoji-png-7.png"
+            alt="chatterbot"
+            style="width:40px;height:40px;"
+    />Your Personal ChatBot
+</h1>
+<div class="box"></div>
+<div class="boxed">
+    <div>
+        <div id="chatbox">
+            <img
+                    src="https://pngimage.net/wp-content/uploads/2018/06/woman-emoji-png-7.png"
+                    alt="chatterbot"
+                    style="width:40px;height:40px;"
+            />
+            <p class="botText"><span>Hi! I'm your chatbot.</span></p>
+        </div>
+        <div id="userInput">
+            <input id="textInput" type="text" name="msg" placeholder="Message">
+            <input id="buttonInput" type="submit" value="Send">
+        </div>
+    </div>
+    <script>
+        function getBotResponse() {
+            var rawText = $("#textInput").val();
+            var userHtml = '<p class="userText"><span>' + rawText + '</span></p>'
+            $("#textInput").val("");
+            $("#chatbox").append(userHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+
+            $.get("/get", { msg: rawText }).done(function(data) {
+                var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+                $("#chatbox").append(botHtml);
+                document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            });
+        }
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+            getBotResponse();
+        })
+    </script>
+</div>
+</body>
+</html>
+
+
